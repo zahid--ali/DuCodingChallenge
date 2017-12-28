@@ -2,6 +2,7 @@ package com.challenge.du.ui.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +11,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.challenge.du.R;
+import com.challenge.du.controllers.GlideApp;
 import com.challenge.du.models.HomeContentModel;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by k.zahid on 12/28/17.
@@ -28,7 +29,6 @@ public class ContentAdapter extends BaseAdapter {
     List<HomeContentModel> contentList;
     Context context;
     private final LayoutInflater inflater;
-
 
 
     public ContentAdapter(Context context, List<HomeContentModel> contentList) {
@@ -76,23 +76,27 @@ public class ContentAdapter extends BaseAdapter {
         ImageView ivTileImage;
         @BindView(R.id.tv_tile_description)
         TextView tvTileDescription;
+        @BindView(R.id.fl_root_tile_view)
+        FrameLayout flRootTileView;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
 
-        @OnClick(R.id.fl_root_tile_view)
-        public void onViewClicked() {
-            //todo open link
-        }
 
-        private void bindData(HomeContentModel content) {
-            Glide.with(context).load(content.getImagePath()).into(ivTileImage);
+        private void bindData(final HomeContentModel content) {
+            GlideApp.with(context).load(content.getImagePath()).into(ivTileImage);
             tvTileTitle.setText(content.getTitle());
             tvTileTitle.setTextColor(Color.parseColor(content.getTitleColor()));
             tvTileDescription.setTextColor(Color.parseColor(content.getShortDescColor()));
             tvTileDescription.setText(content.getShortDesc());
-
+            flRootTileView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (content.getExternalLink() != null && Patterns.WEB_URL.matcher(content.getExternalLink()).matches())
+                        new FinestWebView.Builder(context).show(content.getExternalLink());
+                }
+            });
         }
     }
 }

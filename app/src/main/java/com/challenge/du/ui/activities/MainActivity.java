@@ -40,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<HomeScreenResponse> call, Response<HomeScreenResponse> response) {
                 if (response.body() != null && response.body().getContentList() != null) {
-                    for (int i = 0; i < response.body().getContentList().size(); i++) {
-                        contentList.add(response.body().getContentList().get(i));
+                    for (HomeContentModel content : response.body().getContentList()) {
+                        if (content.getIsActive() == 1 && content.getIsVisible() == 1)
+                            contentList.add(content);
                     }
                     mContentAdapter.notifyDataSetChanged();
                 }
