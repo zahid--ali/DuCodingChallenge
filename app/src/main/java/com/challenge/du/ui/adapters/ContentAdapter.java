@@ -1,6 +1,7 @@
 package com.challenge.du.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import com.challenge.du.R;
 import com.challenge.du.controllers.GlideApp;
 import com.challenge.du.models.HomeContentModel;
+import com.challenge.du.ui.activities.FindUsActivity;
+import com.challenge.du.utils.AppConstants;
 import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.List;
@@ -93,8 +96,12 @@ public class ContentAdapter extends BaseAdapter {
             flRootTileView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     if (content.getExternalLink() != null && Patterns.WEB_URL.matcher(content.getExternalLink()).matches())
                         new FinestWebView.Builder(context).show(content.getExternalLink());
+                    else if (content.getSectionId() == AppConstants.FIND_US_SECTION_ID) {
+                        context.startActivity(new Intent(context, FindUsActivity.class));
+                    }
                 }
             });
         }

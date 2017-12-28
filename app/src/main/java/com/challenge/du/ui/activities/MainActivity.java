@@ -56,16 +56,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Api.SERVICE.getNearByBranches().enqueue(new Callback<NearbyBranchesResponse>() {
-//            @Override
-//            public void onResponse(Call<NearbyBranchesResponse> call, Response<NearbyBranchesResponse> response) {
-//                Log.d("success", "true");
-//            }
-//
-//            @Override
-//            public void onFailure(Call<NearbyBranchesResponse> call, Throwable t) {
-//                Log.d("failure", "false");
-//            }
-//        });
+
     }
 }
