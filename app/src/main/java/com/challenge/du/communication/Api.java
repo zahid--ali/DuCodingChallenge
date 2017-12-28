@@ -3,6 +3,7 @@ package com.challenge.du.communication;
 
 import com.challenge.du.BuildConfig;
 import com.challenge.du.communication.response.HomeScreenResponse;
+import com.challenge.du.communication.response.NearbyBranchesResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +12,6 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 /**
  * Created by k.zahid on 11/7/17.
@@ -31,10 +31,10 @@ public interface Api {
             .build().create(Api.class);
 
     @GET("19kxcv")
-    Call<HomeScreenResponse> GetHomeScreenContent();
+    Call<HomeScreenResponse> getHomeScreenContent();
 
-
-
+    @GET("114kkf")
+    Call<NearbyBranchesResponse> getNearByBranches();
 
 
 }
