@@ -108,7 +108,12 @@ public class SectionAdapter extends BaseAdapter {
                     if (content.getExternalLink() != null && Patterns.WEB_URL.matcher(content.getExternalLink()).matches())
                         new FinestWebView.Builder(context).show(content.getExternalLink());
                     else if (content.getSectionId() == AppConstants.FIND_US_SECTION_ID) {
-                        context.startActivity(new Intent(context, FindUsActivity.class));
+                        Intent i = new Intent(context, FindUsActivity.class);
+                        if (LocaleHelper.getLanguage(context).equals("ar"))
+                            i.putExtra("Title", content.getTitleArabic());
+                        else
+                            i.putExtra("Title", content.getTitle());
+                        context.startActivity(i);
                     }
                 }
             });

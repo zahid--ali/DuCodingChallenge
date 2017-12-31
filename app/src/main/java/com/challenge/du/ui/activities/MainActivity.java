@@ -14,6 +14,7 @@ import com.challenge.du.communication.response.HomeScreenResponse;
 import com.challenge.du.controllers.AppController;
 import com.challenge.du.models.SectionModel;
 import com.challenge.du.ui.adapters.SectionAdapter;
+import com.challenge.du.ui.fragments.ProgressDialogFragment;
 import com.google.gson.stream.MalformedJsonException;
 
 import java.util.ArrayList;
@@ -53,10 +54,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getHomeScreenContent() {
+        ProgressDialogFragment.show(MainActivity.this);
         call = Api.SERVICE.getHomeScreenContent();
         call.enqueue(new Callback<HomeScreenResponse>() {
             @Override
             public void onResponse(Call<HomeScreenResponse> call, Response<HomeScreenResponse> response) {
+                ProgressDialogFragment.hide(MainActivity.this);
                 if (response.body() != null && response.body().getContentList() != null) {
                     for (SectionModel section : response.body().getContentList()) {
                         if (section.getIsActive() == 1 && section.getIsVisible() == 1) {
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<HomeScreenResponse> call, Throwable t) {
+                ProgressDialogFragment.hide(MainActivity.this);
                 if (t instanceof MalformedJsonException) {
                     Toast.makeText(MainActivity.this, "Internal Error", Toast.LENGTH_SHORT).show();
                 } else {

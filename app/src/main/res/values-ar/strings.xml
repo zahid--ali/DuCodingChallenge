@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Du</string>
 
+    <!-- Find Us Screen -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_find_us">FindUsActivity</string>
     <string name="action_settings">Settings</string>
@@ -9,5 +10,7 @@
     <string name="title_tab_shop">Shops</string>
     <string name="title_tab_wifi_uae">WifiUae</string>
     <string name="title_tab_payment_machines">Payment Machines</string>
-    <string name="kilometer" translatable="false">%1$s كيلو</string>
+    <string name="kilometer">%1$s كيلو</string>
+    <!-- Find Us Screen -->
+
 </resources>

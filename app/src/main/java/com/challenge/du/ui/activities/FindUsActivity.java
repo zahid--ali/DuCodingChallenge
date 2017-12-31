@@ -11,12 +11,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,19 +23,22 @@ import com.challenge.du.ui.fragments.ShopListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 
 public class FindUsActivity extends AppCompatActivity implements OnLocationUpdatedListener {
 
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.container)
     ViewPager mViewPager;
     @BindView(R.id.main_content)
     CoordinatorLayout mainContent;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -50,11 +51,10 @@ public class FindUsActivity extends AppCompatActivity implements OnLocationUpdat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_us);
         ButterKnife.bind(this);
-
-        setSupportActionBar(toolbar);
+        tvTitle.setText(getIntent().getStringExtra("Title"));
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -111,10 +111,14 @@ public class FindUsActivity extends AppCompatActivity implements OnLocationUpdat
     }
 
 
-
     @Override
     public void onLocationUpdated(Location location) {
 
+    }
+
+    @OnClick(R.id.iv_back)
+    public void onViewClicked() {
+        onBackPressed();
     }
 
 

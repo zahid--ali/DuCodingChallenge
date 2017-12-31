@@ -54,6 +54,7 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
     ShopsAdapter mShopAdapter;
     private LocationGooglePlayServicesProvider provider;
     Call<NearbyBranchesResponse> call;
+    SmartLocation smartLocation;
 
     public ShopListFragment() {
         // Required empty public constructor
@@ -79,15 +80,17 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        smartLocation = new SmartLocation.Builder(context()).logging(true).build();
         checkLocationPermission();
     }
 
     private void getAllBranches() {
+
         call = Api.SERVICE.getNearByBranches();
         call.enqueue(new Callback<NearbyBranchesResponse>() {
             @Override
             public void onResponse(Call<NearbyBranchesResponse> call, Response<NearbyBranchesResponse> response) {
-
+                ProgressDialogFragment.hide(getActivity());
                 if (response.body().getCode() == 0 && response.body() != null && response.body().getBranchesList() != null) {
                     for (int i = 0; i < response.body().getBranchesList().size(); i++) {
                         shopList.add(response.body().getBranchesList().get(i));
@@ -99,6 +102,7 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
 
             @Override
             public void onFailure(Call<NearbyBranchesResponse> call, Throwable t) {
+                ProgressDialogFragment.hide(getActivity());
                 if (t instanceof MalformedJsonException) {
                     Toast.makeText(getActivity(), "Internal Error", Toast.LENGTH_SHORT).show();
                 } else {
@@ -106,6 +110,8 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
                 }
 
                 // In case there is no internet connection get the sections from cache
+                AppController.USER_LOCATION_LAT = smartLocation.location().getLastLocation().getLatitude();
+                AppController.USER_LOCATION_LONG = smartLocation.location().getLastLocation().getLongitude();
                 shopList.clear();
                 List<ShopModel> shops = AppController.getRealmInstance().getShops();
                 for (int i = 0; i < shops.size(); i++) {
@@ -153,11 +159,10 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
     }
 
     private void startLocation() {
+        ProgressDialogFragment.show(getActivity());
         provider = new LocationGooglePlayServicesProvider();
         provider.setLocationSettingsAlwaysShow(true);
         provider.setCheckLocationSettings(true);
-        SmartLocation smartLocation = new SmartLocation.Builder(context()).logging(true).build();
-
         if (smartLocation.location().state().locationServicesEnabled()) {
             smartLocation.location(provider).start(this);
         }
