@@ -165,6 +165,8 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
         provider.setCheckLocationSettings(true);
         if (smartLocation.location().state().locationServicesEnabled()) {
             smartLocation.location(provider).start(this);
+        } else {
+            Toast.makeText(getActivity(), "Turn on GPS please", Toast.LENGTH_SHORT).show();
         }
     }
 }
