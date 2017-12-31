@@ -108,21 +108,9 @@ public class FindUsActivity extends AppCompatActivity implements OnLocationUpdat
 
             }
         });
-
-
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_find_us, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onLocationUpdated(Location location) {

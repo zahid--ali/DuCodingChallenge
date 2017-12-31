@@ -1,7 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Du</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_find_us">FindUsActivity</string>
     <string name="action_settings">Settings</string>
@@ -9,5 +9,5 @@
     <string name="title_tab_shop">Shops</string>
     <string name="title_tab_wifi_uae">WifiUae</string>
     <string name="title_tab_payment_machines">Payment Machines</string>
-    <string name="kilometer" translatable="false">%1$s KM</string>
+    <string name="kilometer" translatable="false">%1$s كيلو</string>
 </resources>
