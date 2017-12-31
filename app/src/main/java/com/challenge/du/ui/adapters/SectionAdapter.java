@@ -13,10 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.challenge.du.R;
+import com.challenge.du.controllers.AppController;
 import com.challenge.du.controllers.GlideApp;
 import com.challenge.du.models.SectionModel;
 import com.challenge.du.ui.activities.FindUsActivity;
 import com.challenge.du.utils.AppConstants;
+import com.challenge.du.utils.LocaleHelper;
 import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.List;
@@ -62,7 +64,7 @@ public class SectionAdapter extends BaseAdapter {
         if (view != null) {
             holder = (ViewHolder) view.getTag();
         } else {
-            view = inflater.inflate(R.layout.home_content_item_view, viewGroup, false);
+            view = inflater.inflate(R.layout.section_item_view, viewGroup, false);
             holder = new ViewHolder(view);
             view.setTag(holder);
         }
@@ -89,10 +91,16 @@ public class SectionAdapter extends BaseAdapter {
 
         private void bindData(final SectionModel content) {
             GlideApp.with(context).load(content.getImagePath()).into(ivTileImage);
-            tvTileTitle.setText(content.getTitle());
+            if (LocaleHelper.getLanguage(AppController.context()).equals("ar")) {
+                tvTileTitle.setText(content.getTitleArabic());
+                tvTileDescription.setText(content.getShortDescArabic());
+            } else {
+                tvTileTitle.setText(content.getTitle());
+                tvTileDescription.setText(content.getShortDesc());
+            }
+
             tvTileTitle.setTextColor(Color.parseColor(content.getTitleColor()));
             tvTileDescription.setTextColor(Color.parseColor(content.getShortDescColor()));
-            tvTileDescription.setText(content.getShortDesc());
             flRootTileView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

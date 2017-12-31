@@ -38,9 +38,9 @@ public class AppController extends Application {
         mInstance = this;
         Realm.init(this);
         if (Resources.getSystem().getConfiguration().locale.getDisplayLanguage().equals("Arabic") || Resources.getSystem().getConfiguration().locale.getDisplayLanguage().equals("العربية")) {
-            LocaleHelper.setLocale(mInstance, SharedPrefUtil.getString(AppConstants.SELECTED_LANGUAGE, "ar"));
+            LocaleHelper.setLocale(mInstance, "ar");
         } else {
-            LocaleHelper.setLocale(mInstance, SharedPrefUtil.getString(AppConstants.SELECTED_LANGUAGE, "en"));
+            LocaleHelper.setLocale(mInstance, "en");
         }
         realmInstance = new RealmController();
 
