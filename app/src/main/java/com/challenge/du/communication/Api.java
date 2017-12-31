@@ -31,10 +31,10 @@ public interface Api {
             .build().create(Api.class);
 
     @GET("19kxcv")
-    Call<SectionResponse> getHomeScreenContent();
+    Call<SectionResponse> getSections();
 
     @GET("114kkf")
-    Call<ShopResponse> getNearByBranches();
+    Call<ShopResponse> getShops();
 
 
 }

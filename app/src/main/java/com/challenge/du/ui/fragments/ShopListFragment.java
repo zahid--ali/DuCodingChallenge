@@ -84,9 +84,9 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
         checkLocationPermission();
     }
 
-    private void getAllBranches() {
+    private void getShops() {
 
-        call = Api.SERVICE.getNearByBranches();
+        call = Api.SERVICE.getShops();
         call.enqueue(new Callback<ShopResponse>() {
             @Override
             public void onResponse(Call<ShopResponse> call, Response<ShopResponse> response) {
@@ -138,7 +138,7 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
         } else {
             AppController.USER_LOCATION_LAT = location.getLatitude();
             AppController.USER_LOCATION_LONG = location.getLongitude();
-            getAllBranches();
+            getShops();
         }
     }
 

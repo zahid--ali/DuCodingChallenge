@@ -48,14 +48,14 @@ public class MainActivity extends AppCompatActivity {
         gridview.setLayoutAnimation(controller);
         gridview.setAdapter(mSectionAdapter);
         gridview.startLayoutAnimation();
-        getHomeScreenContent();
+        getHomeScreenSections();
 
 
     }
 
-    private void getHomeScreenContent() {
+    private void getHomeScreenSections() {
         ProgressDialogFragment.show(MainActivity.this);
-        call = Api.SERVICE.getHomeScreenContent();
+        call = Api.SERVICE.getSections();
         call.enqueue(new Callback<SectionResponse>() {
             @Override
             public void onResponse(Call<SectionResponse> call, Response<SectionResponse> response) {
