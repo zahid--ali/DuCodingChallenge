@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.challenge.du.R;
 import com.challenge.du.controllers.GlideApp;
-import com.challenge.du.models.HomeContentModel;
+import com.challenge.du.models.SectionModel;
 import com.challenge.du.ui.activities.FindUsActivity;
 import com.challenge.du.utils.AppConstants;
 import com.thefinestartist.finestwebview.FinestWebView;
@@ -28,13 +28,13 @@ import butterknife.ButterKnife;
  * Created by k.zahid on 12/28/17.
  */
 
-public class ContentAdapter extends BaseAdapter {
-    List<HomeContentModel> contentList;
+public class SectionAdapter extends BaseAdapter {
+    List<SectionModel> contentList;
     Context context;
     private final LayoutInflater inflater;
 
 
-    public ContentAdapter(Context context, List<HomeContentModel> contentList) {
+    public SectionAdapter(Context context, List<SectionModel> contentList) {
         this.context = context;
         this.contentList = contentList;
         inflater = LayoutInflater.from(context);
@@ -66,7 +66,7 @@ public class ContentAdapter extends BaseAdapter {
             holder = new ViewHolder(view);
             view.setTag(holder);
         }
-        holder.bindData((HomeContentModel) getItem(position));
+        holder.bindData((SectionModel) getItem(position));
 
         return view;
     }
@@ -87,7 +87,7 @@ public class ContentAdapter extends BaseAdapter {
         }
 
 
-        private void bindData(final HomeContentModel content) {
+        private void bindData(final SectionModel content) {
             GlideApp.with(context).load(content.getImagePath()).into(ivTileImage);
             tvTileTitle.setText(content.getTitle());
             tvTileTitle.setTextColor(Color.parseColor(content.getTitleColor()));

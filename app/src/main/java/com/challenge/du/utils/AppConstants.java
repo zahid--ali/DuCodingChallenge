@@ -6,4 +6,7 @@ package com.challenge.du.utils;
 
 public class AppConstants {
     public static final int FIND_US_SECTION_ID = 10;
+    public static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";
+
+
 }

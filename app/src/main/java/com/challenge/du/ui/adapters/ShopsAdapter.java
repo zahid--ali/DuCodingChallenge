@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.challenge.du.R;
-import com.challenge.du.models.BranchModel;
+import com.challenge.du.models.ShopModel;
 
 import java.util.List;
 
@@ -21,10 +21,10 @@ import butterknife.ButterKnife;
 
 public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> {
     Context context;
-    List<BranchModel> shopList;
+    List<ShopModel> shopList;
     LayoutInflater inflater;
 
-    public ShopsAdapter(Context context, List<BranchModel> shopList) {
+    public ShopsAdapter(Context context, List<ShopModel> shopList) {
         this.shopList = shopList;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -59,7 +59,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> 
             ButterKnife.bind(this, itemView);
         }
 
-        private void bindData(BranchModel branch) {
+        private void bindData(ShopModel branch) {
             tvShopTitle.setText(branch.getTitle());
         }
 

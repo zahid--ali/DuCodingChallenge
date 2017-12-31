@@ -1,49 +1,26 @@
-package com.challenge.du.models;
+package com.challenge.du.models.realm;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by k.zahid on 12/28/17.
  */
 
-public class BranchModel {
+public class ShopRealmModel extends RealmObject {
 
-    @SerializedName("locationId")
-    @Expose
+    @PrimaryKey
     private int locationId;
-    @SerializedName("locationSection")
-    @Expose
     private int locationSection;
-    @SerializedName("title")
-    @Expose
     private String title;
-    @SerializedName("titleArabic")
-    @Expose
     private String titleArabic;
-    @SerializedName("hourOperation")
-    @Expose
     private String hourOperation;
-    @SerializedName("address")
-    @Expose
     private String address;
-    @SerializedName("addressArabic")
-    @Expose
     private String addressArabic;
-    @SerializedName("latitude")
-    @Expose
     private double latitude;
-    @SerializedName("longitude")
-    @Expose
     private double longitude;
-    @SerializedName("isActive")
-    @Expose
     private int isActive;
-    @SerializedName("createdDate")
-    @Expose
     private long createdDate;
-    @SerializedName("updatedDate")
-    @Expose
     private long updatedDate;
 
     public int getLocationId() {

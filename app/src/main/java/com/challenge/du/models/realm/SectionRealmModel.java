@@ -1,72 +1,33 @@
-package com.challenge.du.models;
+package com.challenge.du.models.realm;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by k.zahid on 12/28/17.
  */
 
-public class HomeContentModel {
-    @SerializedName("sectionId")
-    @Expose
+public class SectionRealmModel extends RealmObject{
+    @PrimaryKey
     private int sectionId;
-    @SerializedName("title")
-    @Expose
     private String title;
-    @SerializedName("titleArabic")
-    @Expose
     private String titleArabic;
-    @SerializedName("titleColor")
-    @Expose
     private String titleColor;
-    @SerializedName("shortDesc")
-    @Expose
     private String shortDesc;
-    @SerializedName("shortDescArabic")
-    @Expose
     private String shortDescArabic;
-    @SerializedName("shortDescColor")
-    @Expose
     private String shortDescColor;
-    @SerializedName("imagePath")
-    @Expose
     private String imagePath;
-    @SerializedName("position")
-    @Expose
     private int position;
-    @SerializedName("isActive")
-    @Expose
     private int isActive;
-    @SerializedName("isVisible")
-    @Expose
     private int isVisible;
-    @SerializedName("isCmsApi")
-    @Expose
     private int isCmsApi;
-    @SerializedName("isTileView")
-    @Expose
     private int isTileView;
-    @SerializedName("isCmsSection")
-    @Expose
     private int isCmsSection;
-    @SerializedName("isDeletable")
-    @Expose
     private int isDeletable;
-    @SerializedName("createdDate")
-    @Expose
     private long createdDate;
-    @SerializedName("updatedDate")
-    @Expose
     private long updatedDate;
-    @SerializedName("isLink")
-    @Expose
     private int isLink;
-    @SerializedName("externalLink")
-    @Expose
     private String externalLink;
-    @SerializedName("externalLinkArabic")
-    @Expose
     private String externalLinkArabic;
 
 

@@ -1,6 +1,7 @@
 package com.challenge.du.ui.activities;
 
 import android.content.res.AssetManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -24,8 +25,9 @@ import com.challenge.du.ui.fragments.ShopListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
 
-public class FindUsActivity extends AppCompatActivity {
+public class FindUsActivity extends AppCompatActivity implements OnLocationUpdatedListener {
 
 
     @BindView(R.id.toolbar)
@@ -36,6 +38,7 @@ public class FindUsActivity extends AppCompatActivity {
     CoordinatorLayout mainContent;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
+
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -107,7 +110,6 @@ public class FindUsActivity extends AppCompatActivity {
         });
 
 
-
     }
 
 
@@ -120,6 +122,11 @@ public class FindUsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onLocationUpdated(Location location) {
+
     }
 
 

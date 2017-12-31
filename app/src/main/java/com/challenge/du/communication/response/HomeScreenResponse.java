@@ -1,6 +1,6 @@
 package com.challenge.du.communication.response;
 
-import com.challenge.du.models.HomeContentModel;
+import com.challenge.du.models.SectionModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -14,13 +14,13 @@ public class HomeScreenResponse extends BaseResponse {
 
     @SerializedName("payLoad")
     @Expose
-    private List<HomeContentModel> contentList = null;
+    private List<SectionModel> contentList = null;
 
-    public List<HomeContentModel> getContentList() {
+    public List<SectionModel> getContentList() {
         return contentList;
     }
 
-    public void setContentList(List<HomeContentModel> contentList) {
+    public void setContentList(List<SectionModel> contentList) {
         this.contentList = contentList;
     }
 }

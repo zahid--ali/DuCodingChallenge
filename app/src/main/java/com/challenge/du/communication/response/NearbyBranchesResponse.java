@@ -1,6 +1,6 @@
 package com.challenge.du.communication.response;
 
-import com.challenge.du.models.BranchModel;
+import com.challenge.du.models.ShopModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -14,13 +14,13 @@ public class NearbyBranchesResponse extends BaseResponse {
 
     @SerializedName("payLoad")
     @Expose
-    private List<BranchModel> branchesList = null;
+    private List<ShopModel> branchesList = null;
 
-    public List<BranchModel> getBranchesList() {
+    public List<ShopModel> getBranchesList() {
         return branchesList;
     }
 
-    public void setBranchesList(List<BranchModel> branchesList) {
+    public void setBranchesList(List<ShopModel> branchesList) {
         this.branchesList = branchesList;
     }
 }
