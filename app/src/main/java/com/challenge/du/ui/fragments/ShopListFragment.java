@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.challenge.du.R;
 import com.challenge.du.communication.Api;
-import com.challenge.du.communication.response.NearbyBranchesResponse;
+import com.challenge.du.communication.response.ShopResponse;
 import com.challenge.du.controllers.AppController;
 import com.challenge.du.models.ShopModel;
 import com.challenge.du.ui.adapters.ShopsAdapter;
@@ -50,10 +50,10 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
     RecyclerView rvShops;
     Unbinder unbinder;
 
-    List<ShopModel> shopList;
+    List<ShopModel> shops;
     ShopsAdapter mShopAdapter;
     private LocationGooglePlayServicesProvider provider;
-    Call<NearbyBranchesResponse> call;
+    Call<ShopResponse> call;
     SmartLocation smartLocation;
 
     public ShopListFragment() {
@@ -66,8 +66,8 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shops, container, false);
         unbinder = ButterKnife.bind(this, view);
-        shopList = new ArrayList<>();
-        mShopAdapter = new ShopsAdapter(getActivity(), shopList);
+        shops = new ArrayList<>();
+        mShopAdapter = new ShopsAdapter(getActivity(), shops);
         rvShops.setAdapter(mShopAdapter);
         return view;
     }
@@ -87,21 +87,21 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
     private void getAllBranches() {
 
         call = Api.SERVICE.getNearByBranches();
-        call.enqueue(new Callback<NearbyBranchesResponse>() {
+        call.enqueue(new Callback<ShopResponse>() {
             @Override
-            public void onResponse(Call<NearbyBranchesResponse> call, Response<NearbyBranchesResponse> response) {
+            public void onResponse(Call<ShopResponse> call, Response<ShopResponse> response) {
                 ProgressDialogFragment.hide(getActivity());
-                if (response.body().getCode() == 0 && response.body() != null && response.body().getBranchesList() != null) {
-                    for (int i = 0; i < response.body().getBranchesList().size(); i++) {
-                        shopList.add(response.body().getBranchesList().get(i));
+                if (response.body().getCode() == 0 && response.body() != null && response.body().getShops() != null) {
+                    for (int i = 0; i < response.body().getShops().size(); i++) {
+                        shops.add(response.body().getShops().get(i));
                         mShopAdapter.notifyItemInserted(i);
-                        AppController.getRealmInstance().saveShops(response.body().getBranchesList().get(i));
+                        AppController.getRealmInstance().saveShops(response.body().getShops().get(i));
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<NearbyBranchesResponse> call, Throwable t) {
+            public void onFailure(Call<ShopResponse> call, Throwable t) {
                 ProgressDialogFragment.hide(getActivity());
                 if (t instanceof MalformedJsonException) {
                     Toast.makeText(getActivity(), "Internal Error", Toast.LENGTH_SHORT).show();
@@ -112,10 +112,10 @@ public class ShopListFragment extends Fragment implements OnLocationUpdatedListe
                 // In case there is no internet connection get the sections from cache
                 AppController.USER_LOCATION_LAT = smartLocation.location().getLastLocation().getLatitude();
                 AppController.USER_LOCATION_LONG = smartLocation.location().getLastLocation().getLongitude();
-                shopList.clear();
+                shops.clear();
                 List<ShopModel> shops = AppController.getRealmInstance().getShops();
                 for (int i = 0; i < shops.size(); i++) {
-                    shopList.add(shops.get(i));
+                    ShopListFragment.this.shops.add(shops.get(i));
                     mShopAdapter.notifyItemInserted(i);
                 }
 

@@ -115,30 +115,43 @@ public class RealmController {
         return shopRealmModel;
     }
 
-
-    public void saveShops(List<ShopModel> branches) {
+    /***
+     * this method saves shops in realm for caching
+     * @param shops
+     */
+    public void saveShops(List<ShopModel> shops) {
         Realm realm = Realm.getDefaultInstance();
-        for (final ShopModel branch : branches) {
+        for (final ShopModel shop : shops) {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
-                    realm.copyToRealmOrUpdate(getShopRealmModel(branch));
+                    realm.copyToRealmOrUpdate(getShopRealmModel(shop));
                 }
             });
         }
     }
 
-    public void saveShops(final ShopModel branch) {
+
+    /***
+     * this method saves shops in realm for caching
+     * @param shop
+     */
+    public void saveShops(final ShopModel shop) {
         Realm realm = Realm.getDefaultInstance();
 
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                realm.copyToRealmOrUpdate(getShopRealmModel(branch));
+                realm.copyToRealmOrUpdate(getShopRealmModel(shop));
             }
         });
 
     }
+
+    /***
+     * this method return shops saved in the realm
+     * @return
+     */
 
     public List<ShopModel> getShops() {
         ArrayList<ShopModel> branches = new ArrayList<>();
@@ -148,6 +161,11 @@ public class RealmController {
             branches.add(getShopModel(shopRealmModel));
         return branches;
     }
+
+    /***
+     * This method saves sections in realm for caching
+     * @param sections is the list of sections for home screen
+     */
 
     public void saveSections(List<SectionModel> sections) {
         Realm realm = Realm.getDefaultInstance();
@@ -161,6 +179,12 @@ public class RealmController {
         }
     }
 
+
+    /***
+     * This method saves a section in realm for caching
+     * section is paramter
+     * @param section section of home screen
+     */
     public void saveSection(final SectionModel section) {
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
@@ -172,7 +196,10 @@ public class RealmController {
 
     }
 
-
+    /***
+     * Method to return the sections saved in realm for caching
+     * @return
+     */
     public List<SectionModel> getSections() {
         List<SectionModel> sectionModels = new ArrayList<>();
         Realm realm = Realm.getDefaultInstance();

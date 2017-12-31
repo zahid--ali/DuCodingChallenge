@@ -26,10 +26,22 @@ public class LocaleHelper {
         return setLocale(context, lang);
     }
 
+
+    /***
+     * return current language
+     * @param context Application Context
+     * @return
+     */
     public static String getLanguage(Context context) {
         return getPersistedData(context, Locale.getDefault().getLanguage());
     }
 
+    /***
+     * set locale of the application
+     * @param context Application Context
+     * @param language locale e.g. en for english or ar for arabic
+     * @return
+     */
     public static Context setLocale(Context context, String language) {
         persist(context, language);
 

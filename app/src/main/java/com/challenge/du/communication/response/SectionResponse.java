@@ -10,17 +10,18 @@ import java.util.List;
  * Created by k.zahid on 12/28/17.
  */
 
-public class HomeScreenResponse extends BaseResponse {
+public class SectionResponse extends BaseResponse {
 
     @SerializedName("payLoad")
     @Expose
-    private List<SectionModel> contentList = null;
+    private List<SectionModel> sections = null;
 
-    public List<SectionModel> getContentList() {
-        return contentList;
+
+    public List<SectionModel> getSections() {
+        return sections;
     }
 
-    public void setContentList(List<SectionModel> contentList) {
-        this.contentList = contentList;
+    public void setSections(List<SectionModel> sections) {
+        this.sections = sections;
     }
 }

@@ -2,8 +2,8 @@ package com.challenge.du.communication;
 
 
 import com.challenge.du.BuildConfig;
-import com.challenge.du.communication.response.HomeScreenResponse;
-import com.challenge.du.communication.response.NearbyBranchesResponse;
+import com.challenge.du.communication.response.SectionResponse;
+import com.challenge.du.communication.response.ShopResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,10 +31,10 @@ public interface Api {
             .build().create(Api.class);
 
     @GET("19kxcv")
-    Call<HomeScreenResponse> getHomeScreenContent();
+    Call<SectionResponse> getHomeScreenContent();
 
     @GET("114kkf")
-    Call<NearbyBranchesResponse> getNearByBranches();
+    Call<ShopResponse> getNearByBranches();
 
 
 }

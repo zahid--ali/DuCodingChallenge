@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.challenge.du.R;
 import com.challenge.du.communication.Api;
-import com.challenge.du.communication.response.HomeScreenResponse;
+import com.challenge.du.communication.response.SectionResponse;
 import com.challenge.du.controllers.AppController;
 import com.challenge.du.models.SectionModel;
 import com.challenge.du.ui.adapters.SectionAdapter;
@@ -29,20 +29,20 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     double latitude, longitude;
-    List<SectionModel> contentList;
+    List<SectionModel> sections;
     @BindView(R.id.gridview)
     GridView gridview;
     SectionAdapter mSectionAdapter;
 
-    Call<HomeScreenResponse> call;
+    Call<SectionResponse> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        contentList = new ArrayList<>();
-        mSectionAdapter = new SectionAdapter(MainActivity.this, contentList);
+        sections = new ArrayList<>();
+        mSectionAdapter = new SectionAdapter(MainActivity.this, sections);
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.grid_item_anim);
         GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .2f, .2f);
         gridview.setLayoutAnimation(controller);
@@ -56,15 +56,15 @@ public class MainActivity extends AppCompatActivity {
     private void getHomeScreenContent() {
         ProgressDialogFragment.show(MainActivity.this);
         call = Api.SERVICE.getHomeScreenContent();
-        call.enqueue(new Callback<HomeScreenResponse>() {
+        call.enqueue(new Callback<SectionResponse>() {
             @Override
-            public void onResponse(Call<HomeScreenResponse> call, Response<HomeScreenResponse> response) {
+            public void onResponse(Call<SectionResponse> call, Response<SectionResponse> response) {
                 ProgressDialogFragment.hide(MainActivity.this);
-                if (response.body() != null && response.body().getContentList() != null) {
-                    for (SectionModel section : response.body().getContentList()) {
+                if (response.body() != null && response.body().getSections() != null) {
+                    for (SectionModel section : response.body().getSections()) {
                         if (section.getIsActive() == 1 && section.getIsVisible() == 1) {
                             AppController.getRealmInstance().saveSection(section);
-                            contentList.add(section);
+                            sections.add(section);
                         }
                     }
                     mSectionAdapter.notifyDataSetChanged();
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<HomeScreenResponse> call, Throwable t) {
+            public void onFailure(Call<SectionResponse> call, Throwable t) {
                 ProgressDialogFragment.hide(MainActivity.this);
                 if (t instanceof MalformedJsonException) {
                     Toast.makeText(MainActivity.this, "Internal Error", Toast.LENGTH_SHORT).show();
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // In case there is no internet connection get the sections from cache
                 for (SectionModel section : AppController.getRealmInstance().getSections()) {
-                    contentList.add(section);
+                    sections.add(section);
                 }
                 mSectionAdapter.notifyDataSetChanged();
 

@@ -10,17 +10,17 @@ import java.util.List;
  * Created by k.zahid on 12/28/17.
  */
 
-public class NearbyBranchesResponse extends BaseResponse {
+public class ShopResponse extends BaseResponse {
 
     @SerializedName("payLoad")
     @Expose
-    private List<ShopModel> branchesList = null;
+    private List<ShopModel> shops = null;
 
-    public List<ShopModel> getBranchesList() {
-        return branchesList;
+    public List<ShopModel> getShops() {
+        return shops;
     }
 
-    public void setBranchesList(List<ShopModel> branchesList) {
-        this.branchesList = branchesList;
+    public void setShops(List<ShopModel> shops) {
+        this.shops = shops;
     }
 }
